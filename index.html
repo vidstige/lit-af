@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <script>
+      function onPass(text) {
+        console.log(text);
+        document.getElementById('response').textContent = text;
+      }
+      function onError(response) {
+        console.error(response);
+        document.getElementById('response').textContent = text;
+      }
+      function foobar() {
+        const pass = document.getElementById('pass').checked;
+        const url = pass ? '/pass' : '/fail';
+        console.log(url);
+        fetch(url)
+          .then(response => response.text().then(onPass))
+          .catch(response => response.text().then(onError));
+      }
+    </script>
+  </head>
+  <body>
+    <input type="checkbox" id="pass" checked><label for="pass">pass</label>
+    <button onclick="foobar()">foobar</button>
+    <p id="response"></p>
+  </body>
+</html>
